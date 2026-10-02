@@ -1,0 +1,42 @@
+multivendor/                       <-- Git / Project Root
+│
+├── .venv/                         <-- Python Virtual Environment
+├── manage.py                      <-- Django Management Script
+├── requirements.txt               <-- Project Dependencies
+│
+├── core_project/                  <-- Main Project Configuration App
+│   ├── __init__.py
+│   ├── settings.py                <-- Global Settings (DATABASES, INSTALLED_APPS)
+│   ├── urls.py                    <-- Global URL Routing
+│   └── wsgi.py / asgi.py          <-- Web Server Gateways
+│
+├── accounts/                      <-- 1. Authentication App (Shared)
+│   ├── migrations/
+│   ├── models.py                  <-- Custom User model (is_vendor, is_customer)
+│   ├── views.py                   <-- Login, Signup, Logout logic
+│   └── urls.py
+│
+├── vendors/                       <-- 2. Vendor Backend App
+│   ├── migrations/
+│   ├── templates/vendors/         <-- Vendor dashboard HTML
+│   ├── models.py                  <-- VendorProfile (Store Name, Banner, Payout info)
+│   ├── views.py                   <-- Vendor dashboard, managing their own inventory
+│   └── urls.py
+│
+├── customers/                     <-- 3. Customer Backend App
+│   ├── migrations/
+│   ├── templates/customers/       <-- Customer dashboard HTML
+│   ├── models.py                  <-- CustomerProfile (Shipping address, preferences)
+│   ├── views.py                   <-- Order history, profile settings
+│   └── urls.py
+│
+├── products/                      <-- 4. Shared Marketplace App
+│   ├── migrations/
+│   ├── templates/products/        <-- Product catalog, detail pages, search HTML
+│   ├── models.py                  <-- Category, Product (ForeignKey to Vendor), Review
+│   └── views.py                   <-- Product lists, detail views
+│
+└── orders/                        <-- 5. Checkout & Cart App
+    ├── migrations/
+    ├── models.py                  <-- Cart, Order, OrderItem (Splits money per vendor)
+    └── views.py                   <-- Add to cart, Checkout processing, Payment
